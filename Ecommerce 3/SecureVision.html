@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SecureVision - Cámaras y Seguridad Integral</title>
+  <meta name="description" content="Instalación profesional de cámaras de seguridad, alarmas y monitoreo para hogares y oficinas. Cotización gratis." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: {
+              50: '#ecfeff', 100: '#cffafe', 200: '#a5f3fc', 300: '#67e8f9', 400: '#22d3ee',
+              500: '#06b6d4', 600: '#0891b2', 700: '#0e7490', 800: '#155e75', 900: '#164e63'
+            }
+          },
+          boxShadow: { glow: '0 10px 25px -5px rgba(6,182,212,0.25), 0 8px 10px -6px rgba(6,182,212,0.2)' }
+        }
+      }
+    }
+  </script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    html { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+  </style>
+</head>
+<body x-data="secureApp" x-init="init()" :class="{ 'dark bg-slate-950 text-slate-100': dark, 'bg-white text-slate-900': !dark }">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/70 dark:supports-[backdrop-filter]:bg-slate-900/60 border-b border-slate-200/60 dark:border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="#" class="flex items-center gap-2">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white shadow-glow">SV</span>
+          <span class="font-extrabold tracking-tight text-lg">SecureVision</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#servicios" class="hover:text-brand-600 dark:hover:text-brand-400">Servicios</a>
+          <a href="#paquetes" class="hover:text-brand-600 dark:hover:text-brand-400">Paquetes</a>
+          <a href="#portafolio" class="hover:text-brand-600 dark:hover:text-brand-400">Portafolio</a>
+          <a href="#faq" class="hover:text-brand-600 dark:hover:text-brand-400">FAQ</a>
+        </nav>
+        <div class="flex items-center gap-2">
+          <a href="#contacto" class="hidden sm:inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold px-4 py-2 rounded-lg shadow-glow">Cotiza ahora</a>
+          <button @click="dark = !dark" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10" :aria-label="dark ? 'Activar modo claro' : 'Activar modo oscuro'">
+            <template x-if="!dark"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a1 1 0 011 1v2a1 1 0 11-2 0V4a1 1 0 011-1zm0 14a4 4 0 100-8 4 4 0 000 8zm9-4a1 1 0 01-1 1h-2a1 1 0 110-2h2a1 1 0 011 1zM7 12a1 1 0 01-1 1H4a1 1 0 110-2h2a1 1 0 011 1zm10.364 6.364a1 1 0 010 1.414l-1.415 1.414a1 1 0 11-1.414-1.414l1.414-1.414a1 1 0 011.415 0zM6.05 4.636A1 1 0 117.464 3.22L8.88 4.636A1 1 0 017.464 6.05L6.05 4.636zm10.314 0L17.778 6.05A1 1 0 1116.364 7.464L14.95 6.05a1 1 0 111.414-1.414zM6.05 19.364a1 1 0 010-1.414l1.414-1.414A1 1 0 118.88 17.95L7.464 19.364a1 1 0 01-1.414 0z"/></svg></template>
+            <template x-if="dark"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M21.64 13a9 9 0 11-10.63-10.63 7 7 0 0010.63 10.63z"/></svg></template>
+          </button>
+          <button class="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10" @click="mobileMenu = !mobileMenu" aria-label="Abrir menú">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </div>
+      <nav x-show="mobileMenu" x-collapse x-cloak class="md:hidden py-3 space-y-2">
+        <a href="#servicios" class="block px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10">Servicios</a>
+        <a href="#paquetes" class="block px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10">Paquetes</a>
+        <a href="#portafolio" class="block px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10">Portafolio</a>
+        <a href="#faq" class="block px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg:white/10">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-100 via-transparent to-brand-200/50 dark:from-brand-900/20 dark:to-brand-700/10 pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <div>
+          <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">Protegemos lo que más importa</h1>
+          <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">Instalación profesional de cámaras, alarmas y monitoreo. Soluciones a medida para hogares, oficinas y comercios.</p>
+          <div class="mt-6 flex gap-3">
+            <a href="#paquetes" class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold px-5 py-3 rounded-lg shadow-glow">Ver paquetes</a>
+            <a href="#contacto" class="inline-flex items-center gap-2 border border-slate-300 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/5 px-5 py-3 rounded-lg">Contacto</a>
+          </div>
+          <dl class="mt-8 grid grid-cols-3 gap-4 text-center">
+            <div class="rounded-lg border border-slate-200 dark:border-white/10 p-4"><dt class="text-2xl font-bold" x-text="stats.proyectos"></dt><dd class="text-xs text-slate-500">Proyectos</dd></div>
+            <div class="rounded-lg border border-slate-200 dark:border-white/10 p-4"><dt class="text-2xl font-bold" x-text="stats.anios"></dt><dd class="text-xs text-slate-500">Años</dd></div>
+            <div class="rounded-lg border border-slate-200 dark:border-white/10 p-4"><dt class="text-2xl font-bold" x-text="stats.satisfaccion"></dt><dd class="text-xs text-slate-500">Satisfacción</dd></div>
+          </dl>
+        </div>
+        <div class="relative">
+          <div class="aspect-[4/3] rounded-2xl bg-gradient-to-br from-slate-100 to-white dark:from-slate-800 dark:to-slate-900 p-2">
+            <img src="https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?q=80&w=1200&auto=format&fit=crop" alt="Cámaras de seguridad" class="h-full w-full object-cover rounded-xl">
+          </div>
+          <div class="absolute -bottom-6 -left-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl p-3 shadow-xl">
+            <div class="flex items-center gap-3">
+              <img src="https://images.unsplash.com/photo-1598257006291-a50ebd0055f2?q=80&w=200&auto=format&fit=crop" class="w-12 h-12 rounded-lg object-cover" alt="Camara"/>
+              <div>
+                <p class="text-sm font-semibold">Kit 4 Cámaras 4K</p>
+                <p class="text-xs text-slate-500">Instalación incluida</p>
+              </div>
+              <a href="#contacto" class="ml-auto text-xs px-3 py-1 bg-brand-600 text-white rounded-md">Cotizar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section id="servicios" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h2 class="text-xl sm:text-2xl font-bold text-center">Soluciones integrales</h2>
+    <p class="mt-2 text-center text-slate-600 dark:text-slate-300">Planificamos, instalamos y mantenemos sistemas de seguridad.</p>
+    <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <template x-for="s in services" :key="s.title">
+        <div class="rounded-2xl border border-slate-200 dark:border-white/10 p-6 bg-white/70 dark:bg-slate-900/60">
+          <div class="h-12 w-12 rounded-lg bg-brand-100 text-brand-700 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path :d="s.icon"/></svg>
+          </div>
+          <h3 class="font-semibold" x-text="s.title"></h3>
+          <p class="mt-2 text-sm text-slate-500" x-text="s.desc"></p>
+        </div>
+      </template>
+    </div>
+  </section>
+
+  <!-- Paquetes / Precios -->
+  <section id="paquetes" class="bg-gradient-to-b from-slate-50 to-white dark:from-slate-900/40 dark:to-slate-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="flex items-center justify-between">
+        <h2 class="text-xl sm:text-2xl font-bold">Paquetes listos para instalar</h2>
+        <div class="flex items-center gap-2 text-sm">
+          <span class="text-slate-500">Facturación</span>
+          <button class="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-white/10" :class="{ 'bg-brand-600 text-white border-brand-600': billing==='mensual' }" @click="billing='mensual'">Mensual</button>
+          <button class="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-white/10" :class="{ 'bg-brand-600 text-white border-brand-600': billing==='anual' }" @click="billing='anual'">Anual</button>
+        </div>
+      </div>
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <template x-for="p in plans" :key="p.name">
+          <div class="rounded-2xl border border-slate-200 dark:border-white/10 p-6 bg-white/70 dark:bg-slate-900/60 relative overflow-hidden">
+            <template x-if="p.popular"><span class="absolute top-4 right-4 text-xs bg-brand-600 text-white px-2 py-1 rounded">Popular</span></template>
+            <h3 class="font-semibold" x-text="p.name"></h3>
+            <p class="text-sm text-slate-500" x-text="p.desc"></p>
+            <div class="mt-4 flex items-baseline gap-1">
+              <span class="text-3xl font-extrabold" x-text="formatPrice(p.price[billing])"></span>
+              <span class="text-slate-500">/{{ billing }}</span>
+            </div>
+            <ul class="mt-4 space-y-2 text-sm">
+              <template x-for="f in p.features" :key="f">
+                <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-600" viewBox="0 0 24 24" fill="currentColor"><path d="M20 6L9 17l-5-5"/></svg><span x-text="f"></span></li>
+              </template>
+            </ul>
+            <a href="#contacto" class="mt-6 inline-flex justify-center w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold px-5 py-3 rounded-lg">Solicitar</a>
+          </div>
+        </template>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portafolio -->
+  <section id="portafolio" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h2 class="text-xl sm:text-2xl font-bold text-center">Trabajos recientes</h2>
+    <p class="mt-2 text-center text-slate-600 dark:text-slate-300">Instalaciones limpias, cableado prolijo y configuraciones seguras.</p>
+    <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <template x-for="i in 6" :key="i">
+        <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10">
+          <img :src="`https://picsum.photos/seed/cam${i}/600/400`" alt="Proyecto" class="w-full h-48 object-cover">
+          <div class="p-4 text-sm">
+            <p class="font-semibold">Residencia Privada</p>
+            <p class="text-slate-500">8 cámaras 4K + DVR con acceso remoto</p>
+          </div>
+        </div>
+      </template>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="bg-gradient-to-b from-slate-50 to-white dark:from-slate-900/40 dark:to-slate-950">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h2 class="text-xl sm:text-2xl font-bold text-center">Preguntas frecuentes</h2>
+      <div class="mt-6 divide-y divide-slate-200 dark:divide-white/10">
+        <template x-for="qa in faqs" :key="qa.q">
+          <details class="group py-4">
+            <summary class="flex items-center justify-between cursor-pointer list-none">
+              <span class="font-medium" x-text="qa.q"></span>
+              <svg class="w-5 h-5 text-slate-500 group-open:rotate-45 transition-transform" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </summary>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300" x-text="qa.a"></p>
+          </details>
+        </template>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid md:grid-cols-2 gap-8">
+      <div>
+        <h2 class="text-xl sm:text-2xl font-bold">Solicita una cotización</h2>
+        <p class="mt-2 text-slate-600 dark:text-slate-300">Cuéntanos tu necesidad y te responderemos en menos de 24 horas.</p>
+        <div class="mt-6 space-y-3 text-sm">
+          <p class="flex items-center gap-2"><svg class="w-5 h-5 text-brand-600" viewBox="0 0 24 24" fill="currentColor"><path d="M2 5h20v14H2z"/></svg> contacto@securevision.com</p>
+          <p class="flex items-center gap-2"><svg class="w-5 h-5 text-brand-600" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24 11.36 11.36 0 003.56.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h2.5a1 1 0 011 1 11.36 11.36 0 00.57 3.56 1 1 0 01-.24 1.02l-2.2 2.2z"/></svg> +54 11 5555‑5555</p>
+          <div class="flex gap-2">
+            <a :href="whatsAppLink()" target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-lg">WhatsApp</a>
+            <a href="#" class="inline-flex items-center gap-2 border border-slate-300 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/5 px-4 py-2 rounded-lg">Llamada</a>
+          </div>
+        </div>
+      </div>
+      <form @submit.prevent="sendForm()" class="rounded-2xl border border-slate-200 dark:border-white/10 p-6 bg-white/70 dark:bg-slate-900/60">
+        <div class="grid grid-cols-1 gap-4">
+          <input type="text" placeholder="Nombre" class="rounded-lg border border-slate-300 dark:border-white/10 px-4 py-3 bg-transparent" x-model="form.name" required>
+          <input type="email" placeholder="Email" class="rounded-lg border border-slate-300 dark:border-white/10 px-4 py-3 bg-transparent" x-model="form.email" required>
+          <input type="tel" placeholder="Teléfono" class="rounded-lg border border-slate-300 dark:border-white/10 px-4 py-3 bg-transparent" x-model="form.phone">
+          <select class="rounded-lg border border-slate-300 dark:border-white/10 px-4 py-3 bg-transparent" x-model="form.service" required>
+            <option value="">Selecciona un servicio</option>
+            <template x-for="s in services" :key="s.title"><option :value="s.title" x-text="s.title"></option></template>
+          </select>
+          <textarea placeholder="Describe tu proyecto" class="rounded-lg border border-slate-300 dark:border-white/10 px-4 py-3 bg-transparent min-h-[120px]" x-model="form.message" required></textarea>
+          <button class="bg-brand-600 hover:bg-brand-700 text-white font-semibold px-5 py-3 rounded-lg">Enviar</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 dark:border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-white">SV</span>
+          <span class="font-bold">SecureVision</span>
+        </div>
+        <p class="mt-3 text-slate-500">Expertos en seguridad electrónica y redes. Servicio garantizado.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-3">Servicios</h4>
+        <ul class="space-y-2 text-slate-500">
+          <template x-for="s in services" :key="s.title">
+            <li x-text="s.title"></li>
+          </template>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-3">Cobertura</h4>
+        <ul class="space-y-2 text-slate-500">
+          <li>Capital y GBA</li>
+          <li>Interior por agenda</li>
+          <li>Soporte remoto</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-3">Legal</h4>
+        <ul class="space-y-2 text-slate-500">
+          <li>Políticas</li>
+          <li>Privacidad</li>
+          <li>Términos</li>
+        </ul>
+      </div>
+    </div>
+    <div class="py-4 text-center text-xs text-slate-500">© <span x-text="new Date().getFullYear()"></span> SecureVision. Todos los derechos reservados.</div>
+  </footer>
+
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('secureApp', () => ({
+        dark: window.matchMedia('(prefers-color-scheme: dark)').matches,
+        mobileMenu: false,
+        billing: 'mensual',
+        stats: { proyectos: '350+', anios: '8+', satisfaccion: '98%' },
+        services: [
+          { title: 'Cámaras IP/4K', desc: 'Monitoreo en vivo, almacenamiento en la nube y acceso remoto desde el móvil.', icon: 'M12 2a10 10 0 100 20 10 10 0 000-20zm-1 6h2v5h-2V8zm1 8a1.5 1.5 0 110-3 1.5 1.5 0 010 3z' },
+          { title: 'Alarmas y sensores', desc: 'Perimetral, interior y humo. Integración con sirenas y respuesta inmediata.', icon: 'M12 3l9 4v6c0 5-4 9-9 9s-9-4-9-9V7l9-4z' },
+          { title: 'Control de acceso', desc: 'Lectores biométricos y RFID. Gestión de horarios y reportes.', icon: 'M12 2a5 5 0 015 5v3H7V7a5 5 0 015-5zm-6 10h12v8H6v-8z' },
+          { title: 'Redes y cableado', desc: 'Tendido certificado, racks y puesta en marcha con etiquetado.', icon: 'M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z' },
+          { title: 'Videoporteros', desc: 'Audio/video bidireccional y apertura remota desde app.', icon: 'M3 5h18v10H3V5zm2 12h14v2H5v-2z' },
+          { title: 'Monitoreo 24/7', desc: 'Supervisión remota con registros e informes mensuales.', icon: 'M12 8a4 4 0 100 8 4 4 0 000-8z M4 12a8 8 0 1116 0 8 8 0 01-16 0z' }
+        ],
+        plans: [
+          { name: 'Básico', desc: 'Ideal para departamentos', popular: false, price: { mensual: 49, anual: 499 }, features: ['2 cámaras 4K','Grabador 1TB','App móvil'] },
+          { name: 'Estándar', desc: 'Para casas y oficinas', popular: true, price: { mensual: 79, anual: 799 }, features: ['4 cámaras 4K','Grabador 2TB','App y notificaciones'] },
+          { name: 'Premium', desc: 'Cobertura total', popular: false, price: { mensual: 129, anual: 1299 }, features: ['8 cámaras 4K','Grabador 4TB','App + cloud'] },
+        ],
+        faqs: [
+          { q: '¿Ofrecen garantía?', a: 'Sí, 12 meses sobre equipos e instalación.' },
+          { q: '¿Trabajan fines de semana?', a: 'Instalamos de lunes a sábado, urgencias 24/7.' },
+          { q: '¿Se puede pagar en cuotas?', a: 'Sí, aceptamos tarjetas y transferencias.' },
+        ],
+        form: { name: '', email: '', phone: '', service: '', message: '' },
+        init(){},
+        formatPrice(n){ return new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'USD' }).format(n) },
+        sendForm(){ alert(`¡Gracias ${this.form.name}! Te contactaremos a ${this.form.email}.`) },
+        whatsAppLink(){
+          const text = encodeURIComponent('Hola, quiero una cotización para ' + (this.form.service || 'cámaras de seguridad'));
+          return `https://wa.me/5491155555555?text=${text}`;
+        }
+      }))
+    })
+  </script>
+</body>
+</html>

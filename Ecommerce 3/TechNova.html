@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TechNova - E‑commerce de Tecnología</title>
+  <meta name="description" content="Compra lo último en tecnología: laptops, smartphones, accesorios y más. Envío rápido y soporte experto." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: {
+              50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc', 400: '#818cf8',
+              500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81'
+            }
+          },
+          boxShadow: {
+            glow: '0 10px 25px -5px rgba(79,70,229,0.25), 0 8px 10px -6px rgba(79,70,229,0.2)'
+          }
+        }
+      }
+    }
+  </script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    html { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+  </style>
+</head>
+<body x-data="storeApp" x-init="init()" :class="{ 'dark bg-gray-950 text-gray-100': dark, 'bg-white text-gray-900': !dark }">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/70 dark:supports-[backdrop-filter]:bg-gray-900/60 border-b border-gray-200/60 dark:border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="#" class="flex items-center gap-2">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white shadow-glow">TN</span>
+          <span class="font-extrabold tracking-tight text-lg">TechNova</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#categorias" class="hover:text-brand-600 dark:hover:text-brand-400">Categorías</a>
+          <a href="#ofertas" class="hover:text-brand-600 dark:hover:text-brand-400">Ofertas</a>
+          <a href="#novedades" class="hover:text-brand-600 dark:hover:text-brand-400">Novedades</a>
+          <a href="#soporte" class="hover:text-brand-600 dark:hover:text-brand-400">Soporte</a>
+        </nav>
+        <div class="flex items-center gap-2">
+          <div class="relative w-48 hidden sm:block">
+            <input type="text" placeholder="Buscar..." class="w-full rounded-lg border border-gray-200 dark:border-white/10 bg-white/70 dark:bg-gray-900/60 px-3 py-2 pl-9 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" x-model="search">
+            <svg class="w-4 h-4 absolute left-3 top-2.5 text-gray-400" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <button @click="dark = !dark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10" :aria-label="dark ? 'Activar modo claro' : 'Activar modo oscuro'">
+            <template x-if="!dark"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a1 1 0 011 1v2a1 1 0 11-2 0V4a1 1 0 011-1zm0 14a4 4 0 100-8 4 4 0 000 8zm9-4a1 1 0 01-1 1h-2a1 1 0 110-2h2a1 1 0 011 1zM7 12a1 1 0 01-1 1H4a1 1 0 110-2h2a1 1 0 011 1zm10.364 6.364a1 1 0 010 1.414l-1.415 1.414a1 1 0 11-1.414-1.414l1.414-1.414a1 1 0 011.415 0zM6.05 4.636A1 1 0 117.464 3.22L8.88 4.636A1 1 0 017.464 6.05L6.05 4.636zm10.314 0L17.778 6.05A1 1 0 1116.364 7.464L14.95 6.05a1 1 0 111.414-1.414zM6.05 19.364a1 1 0 010-1.414l1.414-1.414A1 1 0 118.88 17.95L7.464 19.364a1 1 0 01-1.414 0z"/></svg></template>
+            <template x-if="dark"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M21.64 13a9 9 0 11-10.63-10.63 7 7 0 0010.63 10.63z"/></svg></template>
+          </button>
+          <button @click="toggleCart()" class="relative p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10" aria-label="Abrir carrito">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4"/><circle cx="7" cy="21" r="1"/><circle cx="17" cy="21" r="1"/></svg>
+            <span x-show="cartCount>0" x-cloak class="absolute -top-1 -right-1 px-1.5 text-[10px] font-semibold bg-brand-600 text-white rounded-full" x-text="cartCount"></span>
+          </button>
+          <button class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10" @click="mobileMenu = !mobileMenu" aria-label="Abrir menú">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </div>
+      <nav x-show="mobileMenu" x-collapse x-cloak class="md:hidden py-3 space-y-2">
+        <a href="#categorias" class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10">Categorías</a>
+        <a href="#ofertas" class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10">Ofertas</a>
+        <a href="#novedades" class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10">Novedades</a>
+        <a href="#soporte" class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10">Soporte</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-100 via-transparent to-brand-200/50 dark:from-brand-900/20 dark:to-brand-700/10 pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <div>
+          <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">Tecnología que te impulsa</h1>
+          <p class="mt-4 text-lg text-gray-600 dark:text-gray-300">Explora nuestra selección curada de equipos y accesorios. Calidad premium, envío rápido y garantía local.</p>
+          <div class="mt-6 flex gap-3">
+            <a href="#ofertas" class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold px-5 py-3 rounded-lg shadow-glow">Ver ofertas</a>
+            <a href="#novedades" class="inline-flex items-center gap-2 border border-gray-300 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/5 px-5 py-3 rounded-lg">Novedades</a>
+          </div>
+          <dl class="mt-8 grid grid-cols-3 gap-4 text-center">
+            <div class="rounded-lg border border-gray-200 dark:border-white/10 p-4"><dt class="text-2xl font-bold" x-text="stats.envios"></dt><dd class="text-xs text-gray-500">Envíos al día</dd></div>
+            <div class="rounded-lg border border-gray-200 dark:border-white/10 p-4"><dt class="text-2xl font-bold" x-text="stats.clientes"></dt><dd class="text-xs text-gray-500">Clientes felices</dd></div>
+            <div class="rounded-lg border border-gray-200 dark:border-white/10 p-4"><dt class="text-2xl font-bold" x-text="stats.marcas"></dt><dd class="text-xs text-gray-500">Marcas top</dd></div>
+          </dl>
+        </div>
+        <div class="relative">
+          <div class="aspect-[4/3] rounded-2xl bg-gradient-to-br from-gray-100 to-white dark:from-gray-800 dark:to-gray-900 p-2">
+            <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop" alt="Gadgets" class="h-full w-full object-cover rounded-xl">
+          </div>
+          <div class="absolute -bottom-6 -left-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-white/10 rounded-xl p-3 shadow-xl">
+            <div class="flex items-center gap-3">
+              <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=200&auto=format&fit=crop" class="w-12 h-12 rounded-lg object-cover" alt="Laptop"/>
+              <div>
+                <p class="text-sm font-semibold">Laptop Pro 14”</p>
+                <p class="text-xs text-gray-500">Desde $1,199</p>
+              </div>
+              <button class="ml-auto text-xs px-3 py-1 bg-brand-600 text-white rounded-md" @click="addToCart(sampleProduct)">Agregar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filtros y grid de productos -->
+  <section id="ofertas" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <h2 class="text-xl sm:text-2xl font-bold">Ofertas destacadas</h2>
+      <div class="flex items-center gap-2 text-sm">
+        <label class="text-gray-500">Ordenar:</label>
+        <select class="rounded-lg border border-gray-200 dark:border-white/10 bg-transparent px-3 py-2" x-model="sortBy">
+          <option value="popular">Popular</option>
+          <option value="precio-asc">Precio: menor a mayor</option>
+          <option value="precio-desc">Precio: mayor a menor</option>
+          <option value="novedad">Novedades</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Chips de categorías -->
+    <div id="categorias" class="mt-4 flex flex-wrap gap-2">
+      <template x-for="c in categories" :key="c">
+        <button @click="toggleCategory(c)" class="px-3 py-1.5 rounded-full text-sm border border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/10" :class="{ 'bg-brand-600 text-white border-brand-600': activeCategories.includes(c) }" x-text="c"></button>
+      </template>
+    </div>
+
+    <!-- Grid -->
+    <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <template x-for="p in filteredAndSortedProducts()" :key="p.id">
+        <div class="group rounded-2xl border border-gray-200 dark:border-white/10 overflow-hidden bg-white/70 dark:bg-gray-900/60 hover:shadow-xl transition-shadow">
+          <div class="relative">
+            <img :src="p.image" :alt="p.title" class="w-full h-48 object-cover">
+            <span x-show="p.badge" class="absolute top-3 left-3 text-xs font-semibold bg-brand-600 text-white px-2 py-1 rounded">Oferta</span>
+            <button @click="addToCart(p)" class="absolute bottom-3 right-3 inline-flex items-center gap-1 bg-white/90 dark:bg-gray-800/90 backdrop-blur px-3 py-1.5 rounded-md text-sm border border-gray-200 dark:border-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4"/></svg>
+              Agregar
+            </button>
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold line-clamp-2 min-h-[3.5rem]" x-text="p.title"></h3>
+            <div class="mt-2 flex items-center justify-between">
+              <div>
+                <p class="text-brand-600 font-bold" x-text="formatPrice(p.price)"></p>
+                <p class="text-xs text-gray-500" x-show="p.originalPrice">Antes <span class="line-through" x-text="formatPrice(p.originalPrice)"></span></p>
+              </div>
+              <div class="flex items-center gap-1 text-yellow-500">
+                <template x-for="i in 5">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431L24 9.748l-6 5.848L19.335 24 12 19.897 4.665 24 6 15.596 0 9.748l8.332-1.73z"/></svg>
+                </template>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+    </div>
+
+    <!-- Paginación -->
+    <div class="mt-8 flex items-center justify-center gap-2">
+      <button class="px-3 py-1.5 rounded-lg border border-gray-200 dark:border-white/10" @click="prevPage()">Anterior</button>
+      <template x-for="i in totalPages" :key="i">
+        <button class="px-3 py-1.5 rounded-lg border border-gray-200 dark:border-white/10" :class="{ 'bg-brand-600 text-white border-brand-600': i === page }" x-text="i" @click="goTo(i)"></button>
+      </template>
+      <button class="px-3 py-1.5 rounded-lg border border-gray-200 dark:border-white/10" @click="nextPage()">Siguiente</button>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="bg-gradient-to-br from-brand-600 to-brand-700 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid md:grid-cols-2 items-center gap-8">
+        <div>
+          <h3 class="text-2xl font-bold">Únete y recibe un 10% OFF</h3>
+          <p class="mt-2 text-white/80">Promos exclusivas y novedades semanales. Cancela cuando quieras.</p>
+        </div>
+        <form class="flex gap-2" @submit.prevent="subscribe()">
+          <input type="email" required placeholder="tu@email.com" class="w-full md:w-auto flex-1 rounded-lg px-4 py-3 text-gray-900" x-model="email">
+          <button class="bg-white text-brand-700 font-semibold px-6 py-3 rounded-lg hover:bg-white/90">Suscribirme</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="soporte" class="border-t border-gray-200 dark:border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-white">TN</span>
+          <span class="font-bold">TechNova</span>
+        </div>
+        <p class="mt-3 text-gray-500">Tu tienda de confianza en tecnología. Envíos a todo el país y soporte post‑venta.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-3">Ayuda</h4>
+        <ul class="space-y-2 text-gray-500">
+          <li><a href="#" class="hover:text-brand-600">Centro de soporte</a></li>
+          <li><a href="#" class="hover:text-brand-600">Garantías</a></li>
+          <li><a href="#" class="hover:text-brand-600">Políticas</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-3">Categorías</h4>
+        <ul class="space-y-2 text-gray-500">
+          <template x-for="c in categories" :key="c">
+            <li><a href="#categorias" class="hover:text-brand-600" x-text="c"></a></li>
+          </template>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-3">Redes</h4>
+        <div class="flex gap-2">
+          <a class="p-2 rounded-lg border border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/10" href="#">Instagram</a>
+          <a class="p-2 rounded-lg border border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/10" href="#">Facebook</a>
+          <a class="p-2 rounded-lg border border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/10" href="#">X</a>
+        </div>
+      </div>
+    </div>
+    <div class="py-4 text-center text-xs text-gray-500">© <span x-text="new Date().getFullYear()"></span> TechNova. Todos los derechos reservados.</div>
+  </footer>
+
+  <!-- Carrito lateral -->
+  <div x-show="cartOpen" x-cloak class="fixed inset-0 z-50">
+    <div class="absolute inset-0 bg-black/50" @click="toggleCart()"></div>
+    <aside class="absolute right-0 top-0 h-full w-full sm:w-[420px] bg-white dark:bg-gray-900 border-l border-gray-200 dark:border-white/10 p-6 flex flex-col">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-bold">Tu carrito</h3>
+        <button class="p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-lg" @click="toggleCart()">Cerrar</button>
+      </div>
+      <div class="mt-4 space-y-4 overflow-auto flex-1">
+        <template x-if="cart.length===0">
+          <p class="text-gray-500">Aún no tienes productos.</p>
+        </template>
+        <template x-for="item in cart" :key="item.id">
+          <div class="flex items-center gap-3 border border-gray-200 dark:border-white/10 rounded-lg p-3">
+            <img :src="item.image" class="w-16 h-16 rounded object-cover" :alt="item.title">
+            <div class="flex-1">
+              <p class="text-sm font-semibold line-clamp-2" x-text="item.title"></p>
+              <div class="text-xs text-gray-500 flex items-center gap-2 mt-1">
+                <span x-text="formatPrice(item.price)"></span>
+                <span>•</span>
+                <div class="inline-flex items-center gap-2">
+                  <button class="px-2 py-0.5 rounded border" @click="decrement(item)">-</button>
+                  <span x-text="item.qty"></span>
+                  <button class="px-2 py-0.5 rounded border" @click="increment(item)">+</button>
+                </div>
+              </div>
+            </div>
+            <button class="text-xs text-red-600" @click="remove(item)">Quitar</button>
+          </div>
+        </template>
+      </div>
+      <div class="border-t border-gray-200 dark:border-white/10 pt-4">
+        <div class="flex items-center justify-between text-sm">
+          <span>Subtotal</span>
+          <span class="font-semibold" x-text="formatPrice(subtotal)"></span>
+        </div>
+        <button :disabled="cart.length===0" class="mt-4 w-full bg-brand-600 hover:bg-brand-700 disabled:opacity-50 text-white font-semibold py-3 rounded-lg">Finalizar compra</button>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('storeApp', () => ({
+        dark: window.matchMedia('(prefers-color-scheme: dark)').matches,
+        mobileMenu: false,
+        search: '',
+        email: '',
+        categories: ['Laptops','Smartphones','Audio','Gaming','Accesorios','Monitores','Almacenamiento'],
+        activeCategories: [],
+        sortBy: 'popular',
+        page: 1,
+        perPage: 8,
+        products: [],
+        stats: { envios: '1.2K+', clientes: '15K+', marcas: '60+' },
+        cartOpen: false,
+        cart: [],
+        get cartCount() { return this.cart.reduce((a,b)=>a+b.qty,0) },
+        get subtotal() { return this.cart.reduce((a,b)=>a + b.price * b.qty, 0) },
+        sampleProduct: { id: 'sp', title: 'Laptop Pro 14” M2, 16GB RAM, 512GB', price: 1199, image: 'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=800&auto=format&fit=crop' },
+        init() {
+          // generar productos de ejemplo
+          const base = [
+            { title: 'Laptop Pro 14” M2, 16GB RAM, 512GB', price: 1199, category: 'Laptops' },
+            { title: 'Smartphone Ultra 256GB 5G', price: 899, category: 'Smartphones' },
+            { title: 'Auriculares ANC Pro', price: 199, category: 'Audio' },
+            { title: 'Mouse Gamer RGB 26K DPI', price: 79, category: 'Gaming' },
+            { title: 'Teclado Mecánico Low Profile', price: 139, category: 'Gaming' },
+            { title: 'Monitor 27” 165Hz QHD', price: 329, category: 'Monitores' },
+            { title: 'SSD NVMe 2TB Gen4', price: 169, category: 'Almacenamiento' },
+            { title: 'Cargador GaN 65W USB‑C', price: 49, category: 'Accesorios' },
+            { title: 'Barra de Sonido Dolby Atmos', price: 499, category: 'Audio' },
+            { title: 'Cámara Web 4K HDR', price: 159, category: 'Accesorios' },
+            { title: 'Router Wi‑Fi 7 Tri‑Band', price: 299, category: 'Accesorios' },
+            { title: 'Laptop Ultrabook 13” OLED', price: 1299, category: 'Laptops' },
+          ];
+          this.products = base.map((p, i) => ({
+            id: i + 1,
+            ...p,
+            image: `https://picsum.photos/seed/tech${i+1}/600/400`,
+            originalPrice: Math.random() > 0.5 ? Math.round(p.price * 1.15) : null,
+            badge: Math.random() > 0.6
+          }));
+        },
+        toggleCategory(c) {
+          const idx = this.activeCategories.indexOf(c);
+          if (idx > -1) this.activeCategories.splice(idx,1); else this.activeCategories.push(c);
+          this.page = 1;
+        },
+        filteredAndSortedProducts() {
+          let list = this.products
+            .filter(p => (!this.search || p.title.toLowerCase().includes(this.search.toLowerCase())))
+            .filter(p => (this.activeCategories.length === 0 || this.activeCategories.includes(p.category)));
+          switch (this.sortBy) {
+            case 'precio-asc': list.sort((a,b)=>a.price-b.price); break;
+            case 'precio-desc': list.sort((a,b)=>b.price-a.price); break;
+            case 'novedad': list = list.reverse(); break;
+            default: break;
+          }
+          this.totalPages = Math.max(1, Math.ceil(list.length / this.perPage));
+          const start = (this.page-1) * this.perPage;
+          return list.slice(start, start + this.perPage);
+        },
+        prevPage(){ this.page = Math.max(1, this.page-1) },
+        nextPage(){ this.page = Math.min(this.totalPages, this.page+1) },
+        goTo(i){ this.page = i },
+        formatPrice(n){ return new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'USD' }).format(n) },
+        toggleCart(){ this.cartOpen = !this.cartOpen },
+        addToCart(p){
+          const f = this.cart.find(i=>i.id===p.id);
+          if (f) f.qty++; else this.cart.push({ ...p, qty: 1 });
+        },
+        increment(item){ item.qty++ },
+        decrement(item){ item.qty = Math.max(1, item.qty-1) },
+        remove(item){ this.cart = this.cart.filter(i=>i.id!==item.id) },
+        subscribe(){ alert(`¡Gracias por suscribirte, ${this.email}!`) }
+      }))
+    })
+  </script>
+</body>
+</html>
