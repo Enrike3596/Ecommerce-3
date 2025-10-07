@@ -47,7 +47,7 @@
           <a href="#faq" class="hover:text-brand-600 dark:hover:text-brand-400">FAQ</a>
         </nav>
         <div class="flex items-center gap-2">
-          <a href="#contacto" class="hidden sm:inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold px-4 py-2 rounded-lg shadow-glow">Cotiza ahora</a>
+          <a href="TechNova.html" class="hidden sm:inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold px-4 py-2 rounded-lg shadow-glow">Cotiza ahora</a>
           <button @click="dark = !dark" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10" :aria-label="dark ? 'Activar modo claro' : 'Activar modo oscuro'">
             <template x-if="!dark"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a1 1 0 011 1v2a1 1 0 11-2 0V4a1 1 0 011-1zm0 14a4 4 0 100-8 4 4 0 000 8zm9-4a1 1 0 01-1 1h-2a1 1 0 110-2h2a1 1 0 011 1zM7 12a1 1 0 01-1 1H4a1 1 0 110-2h2a1 1 0 011 1zm10.364 6.364a1 1 0 010 1.414l-1.415 1.414a1 1 0 11-1.414-1.414l1.414-1.414a1 1 0 011.415 0zM6.05 4.636A1 1 0 117.464 3.22L8.88 4.636A1 1 0 017.464 6.05L6.05 4.636zm10.314 0L17.778 6.05A1 1 0 1116.364 7.464L14.95 6.05a1 1 0 111.414-1.414zM6.05 19.364a1 1 0 010-1.414l1.414-1.414A1 1 0 118.88 17.95L7.464 19.364a1 1 0 01-1.414 0z"/></svg></template>
             <template x-if="dark"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M21.64 13a9 9 0 11-10.63-10.63 7 7 0 0010.63 10.63z"/></svg></template>
@@ -67,37 +67,23 @@
   </header>
 
   <!-- Hero -->
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-brand-100 via-transparent to-brand-200/50 dark:from-brand-900/20 dark:to-brand-700/10 pointer-events-none"></div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16">
-      <div class="grid md:grid-cols-2 gap-8 items-center">
-        <div>
-          <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">Protegemos lo que más importa</h1>
-          <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">Instalación profesional de cámaras, alarmas y monitoreo. Soluciones a medida para hogares, oficinas y comercios.</p>
-          <div class="mt-6 flex gap-3">
-            <a href="#paquetes" class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold px-5 py-3 rounded-lg shadow-glow">Ver paquetes</a>
-            <a href="#contacto" class="inline-flex items-center gap-2 border border-slate-300 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/5 px-5 py-3 rounded-lg">Contacto</a>
-          </div>
-          <dl class="mt-8 grid grid-cols-3 gap-4 text-center">
-            <div class="rounded-lg border border-slate-200 dark:border-white/10 p-4"><dt class="text-2xl font-bold" x-text="stats.proyectos"></dt><dd class="text-xs text-slate-500">Proyectos</dd></div>
-            <div class="rounded-lg border border-slate-200 dark:border-white/10 p-4"><dt class="text-2xl font-bold" x-text="stats.anios"></dt><dd class="text-xs text-slate-500">Años</dd></div>
-            <div class="rounded-lg border border-slate-200 dark:border-white/10 p-4"><dt class="text-2xl font-bold" x-text="stats.satisfaccion"></dt><dd class="text-xs text-slate-500">Satisfacción</dd></div>
-          </dl>
+  <section class="relative overflow-hidden min-h-[80vh] flex items-center">
+    <!-- Imagen de fondo -->
+    <div class="absolute inset-0 z-0">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1920&auto=format&fit=crop" alt="Sistema de seguridad profesional" class="w-full h-full object-cover opacity-20 dark:opacity-10">
+      <div class="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 to-white/70 dark:from-slate-950/95 dark:via-slate-950/85 dark:to-slate-950/70"></div>
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-100 via-transparent to-brand-200/50 dark:from-brand-900/20 dark:to-brand-700/10 pointer-events-none z-10"></div>
+    <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="max-w-4xl">
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">SecureVision: Líderes en Seguridad Electrónica Integral</h1>
+        <p class="mt-6 text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-3xl">Con más de 8 años de experiencia, somos especialistas en el diseño, instalación y mantenimiento de sistemas de videovigilancia, control de acceso y monitoreo profesional. Nuestra misión es brindar tranquilidad y protección total a través de soluciones tecnológicas de vanguardia adaptadas a cada necesidad.</p>
+        <div class="mt-6 p-4 bg-brand-50/80 dark:bg-brand-900/30 rounded-lg border-l-4 border-brand-500 backdrop-blur-sm">
+          <p class="text-sm sm:text-base text-slate-700 dark:text-slate-300"><strong>Nuestra Visión:</strong> Ser la empresa líder en seguridad electrónica, reconocida por la excelencia en el servicio, innovación tecnológica y compromiso con la protección integral de nuestros clientes.</p>
         </div>
-        <div class="relative">
-          <div class="aspect-[4/3] rounded-2xl bg-gradient-to-br from-slate-100 to-white dark:from-slate-800 dark:to-slate-900 p-2">
-            <img src="https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?q=80&w=1200&auto=format&fit=crop" alt="Cámaras de seguridad" class="h-full w-full object-cover rounded-xl">
-          </div>
-          <div class="absolute -bottom-6 -left-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl p-3 shadow-xl">
-            <div class="flex items-center gap-3">
-              <img src="https://images.unsplash.com/photo-1598257006291-a50ebd0055f2?q=80&w=200&auto=format&fit=crop" class="w-12 h-12 rounded-lg object-cover" alt="Camara"/>
-              <div>
-                <p class="text-sm font-semibold">Kit 4 Cámaras 4K</p>
-                <p class="text-xs text-slate-500">Instalación incluida</p>
-              </div>
-              <a href="#contacto" class="ml-auto text-xs px-3 py-1 bg-brand-600 text-white rounded-md">Cotizar</a>
-            </div>
-          </div>
+        <div class="mt-8 flex flex-col sm:flex-row gap-4">
+          <a href="#paquetes" class="inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-4 rounded-lg shadow-glow text-lg">Ver paquetes</a>
+          <a href="TechNova.html" class="inline-flex items-center justify-center gap-2 border-2 border-brand-600 text-brand-600 hover:bg-brand-50 dark:hover:bg-brand-900/20 px-6 py-4 rounded-lg font-semibold text-lg">Cotizar ahora</a>
         </div>
       </div>
     </div>
@@ -139,7 +125,7 @@
             <p class="text-sm text-slate-500" x-text="p.desc"></p>
             <div class="mt-4 flex items-baseline gap-1">
               <span class="text-3xl font-extrabold" x-text="formatPrice(p.price[billing])"></span>
-              <span class="text-slate-500">/{{ billing }}</span>
+              <span class="text-slate-500" x-text="billing === 'mensual' ? '/mes' : '/año'"></span>
             </div>
             <ul class="mt-4 space-y-2 text-sm">
               <template x-for="f in p.features" :key="f">
@@ -157,13 +143,22 @@
   <section id="portafolio" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <h2 class="text-xl sm:text-2xl font-bold text-center">Trabajos recientes</h2>
     <p class="mt-2 text-center text-slate-600 dark:text-slate-300">Instalaciones limpias, cableado prolijo y configuraciones seguras.</p>
-    <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <template x-for="i in 6" :key="i">
-        <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10">
-          <img :src="`https://picsum.photos/seed/cam${i}/600/400`" alt="Proyecto" class="w-full h-48 object-cover">
+    <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6" x-data="{ 
+      projects: [
+        { title: 'Residencia Privada', desc: '8 cámaras 4K + DVR con acceso remoto', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=600&auto=format&fit=crop' },
+        { title: 'Oficina Corporativa', desc: 'Sistema completo con control de acceso biométrico', image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&auto=format&fit=crop' },
+        { title: 'Centro Comercial', desc: 'Red de 24 cámaras con monitoreo 24/7', image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=600&auto=format&fit=crop' },
+        { title: 'Condominio Residencial', desc: 'Videoporteros IP y alarmas perimetrales', image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=600&auto=format&fit=crop' },
+        { title: 'Bodega Industrial', desc: 'Cámaras térmicas y sensores de movimiento', image: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?q=80&w=600&auto=format&fit=crop' },
+        { title: 'Local Comercial', desc: 'Kit básico 4 cámaras + app móvil', image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=600&auto=format&fit=crop' }
+      ]
+    }">
+      <template x-for="project in projects" :key="project.title">
+        <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10 hover:shadow-lg transition-shadow">
+          <img :src="project.image" :alt="project.title" class="w-full h-48 object-cover">
           <div class="p-4 text-sm">
-            <p class="font-semibold">Residencia Privada</p>
-            <p class="text-slate-500">8 cámaras 4K + DVR con acceso remoto</p>
+            <p class="font-semibold" x-text="project.title"></p>
+            <p class="text-slate-500" x-text="project.desc"></p>
           </div>
         </div>
       </template>
@@ -196,7 +191,7 @@
         <p class="mt-2 text-slate-600 dark:text-slate-300">Cuéntanos tu necesidad y te responderemos en menos de 24 horas.</p>
         <div class="mt-6 space-y-3 text-sm">
           <p class="flex items-center gap-2"><svg class="w-5 h-5 text-brand-600" viewBox="0 0 24 24" fill="currentColor"><path d="M2 5h20v14H2z"/></svg> contacto@securevision.com</p>
-          <p class="flex items-center gap-2"><svg class="w-5 h-5 text-brand-600" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24 11.36 11.36 0 003.56.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h2.5a1 1 0 011 1 11.36 11.36 0 00.57 3.56 1 1 0 01-.24 1.02l-2.2 2.2z"/></svg> +54 11 5555‑5555</p>
+          <p class="flex items-center gap-2"><svg class="w-5 h-5 text-brand-600" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24 11.36 11.36 0 003.56.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h2.5a1 1 0 011 1 11.36 11.36 0 00.57 3.56 1 1 0 01-.24 1.02l-2.2 2.2z"/></svg> +57 312 5971651</p>
           <div class="flex gap-2">
             <a :href="whatsAppLink()" target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-lg">WhatsApp</a>
             <a href="#" class="inline-flex items-center gap-2 border border-slate-300 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/5 px-4 py-2 rounded-lg">Llamada</a>
@@ -273,9 +268,9 @@
           { title: 'Monitoreo 24/7', desc: 'Supervisión remota con registros e informes mensuales.', icon: 'M12 8a4 4 0 100 8 4 4 0 000-8z M4 12a8 8 0 1116 0 8 8 0 01-16 0z' }
         ],
         plans: [
-          { name: 'Básico', desc: 'Ideal para departamentos', popular: false, price: { mensual: 49, anual: 499 }, features: ['2 cámaras 4K','Grabador 1TB','App móvil'] },
-          { name: 'Estándar', desc: 'Para casas y oficinas', popular: true, price: { mensual: 79, anual: 799 }, features: ['4 cámaras 4K','Grabador 2TB','App y notificaciones'] },
-          { name: 'Premium', desc: 'Cobertura total', popular: false, price: { mensual: 129, anual: 1299 }, features: ['8 cámaras 4K','Grabador 4TB','App + cloud'] },
+          { name: 'Básico', desc: 'Ideal para departamentos', popular: false, price: { mensual: 190000, anual: 1950000 }, features: ['2 cámaras 4K','Grabador 1TB','App móvil'] },
+          { name: 'Estándar', desc: 'Para casas y oficinas', popular: true, price: { mensual: 320000, anual: 3250000 }, features: ['4 cámaras 4K','Grabador 2TB','App y notificaciones'] },
+          { name: 'Premium', desc: 'Cobertura total', popular: false, price: { mensual: 520000, anual: 5300000 }, features: ['8 cámaras 4K','Grabador 4TB','App + cloud'] },
         ],
         faqs: [
           { q: '¿Ofrecen garantía?', a: 'Sí, 12 meses sobre equipos e instalación.' },
@@ -284,11 +279,11 @@
         ],
         form: { name: '', email: '', phone: '', service: '', message: '' },
         init(){},
-        formatPrice(n){ return new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'USD' }).format(n) },
+        formatPrice(n){ return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(n) },
         sendForm(){ alert(`¡Gracias ${this.form.name}! Te contactaremos a ${this.form.email}.`) },
         whatsAppLink(){
           const text = encodeURIComponent('Hola, quiero una cotización para ' + (this.form.service || 'cámaras de seguridad'));
-          return `https://wa.me/5491155555555?text=${text}`;
+          return `https://wa.me/573125971651?text=${text}`;
         }
       }))
     })
