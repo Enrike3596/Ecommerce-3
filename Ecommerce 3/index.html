@@ -53,8 +53,12 @@
             <template x-if="!dark"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a1 1 0 011 1v2a1 1 0 11-2 0V4a1 1 0 011-1zm0 14a4 4 0 100-8 4 4 0 000 8zm9-4a1 1 0 01-1 1h-2a1 1 0 110-2h2a1 1 0 011 1zM7 12a1 1 0 01-1 1H4a1 1 0 110-2h2a1 1 0 011 1zm10.364 6.364a1 1 0 010 1.414l-1.415 1.414a1 1 0 11-1.414-1.414l1.414-1.414a1 1 0 011.415 0zM6.05 4.636A1 1 0 117.464 3.22L8.88 4.636A1 1 0 017.464 6.05L6.05 4.636zm10.314 0L17.778 6.05A1 1 0 1116.364 7.464L14.95 6.05a1 1 0 111.414-1.414zM6.05 19.364a1 1 0 010-1.414l1.414-1.414A1 1 0 118.88 17.95L7.464 19.364a1 1 0 01-1.414 0z"/></svg></template>
             <template x-if="dark"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M21.64 13a9 9 0 11-10.63-10.63 7 7 0 0010.63 10.63z"/></svg></template>
           </button>
-          <button class="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10" @click="mobileMenu = !mobileMenu" aria-label="Abrir menú">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <button class="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 border border-slate-200 dark:border-white/20" @click="mobileMenu = !mobileMenu" aria-label="Abrir menú">
+            <svg class="w-6 h-6 text-slate-700 dark:text-slate-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
           </button>
         </div>
       </div>

@@ -64,8 +64,12 @@
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4"/><circle cx="7" cy="21" r="1"/><circle cx="17" cy="21" r="1"/></svg>
             <span x-show="cartCount>0" x-cloak class="absolute -top-1 -right-1 px-1.5 text-[10px] font-semibold bg-brand-600 text-white rounded-full" x-text="cartCount"></span>
           </button>
-          <button class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10" @click="mobileMenu = !mobileMenu" aria-label="Abrir menú">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <button class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 border border-gray-200 dark:border-white/20" @click="mobileMenu = !mobileMenu" aria-label="Abrir menú">
+            <svg class="w-6 h-6 text-gray-700 dark:text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
           </button>
         </div>
       </div>
